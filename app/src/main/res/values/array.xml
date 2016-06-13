@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category">
+        <item>제품명</item>
+        <item>브랜드</item>
+        <item>규격</item>
+        <item>모델</item>
+    </string-array>
+    <string-array name="method">
+        <item>화물</item>
+        <item>택배</item>
+        <item>직접</item>
+    </string-array>
+</resources>

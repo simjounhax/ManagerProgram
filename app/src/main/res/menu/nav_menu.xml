@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:yourapp="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_search"
+        android:title="제품검색"
+        android:icon="@drawable/abc_ic_search_api_mtrl_alpha"
+        yourapp:showAsAction="ifRoom|withText|collapseActionView"
+        yourapp:actionViewClass="android.support.v7.widget.SearchView" />
+    <item android:id="@+id/category"
+        android:title="분류"
+        yourapp:showAsAction="always"
+        android:orderInCategory="1"
+        yourapp:actionViewClass="android.widget.Spinner"/>
+</menu>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/wholeScroll">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFFFE9"
+                tools:context="kr.com.yu.manage_app.NavActivity"
+                android:orientation="horizontal"
+                android:id="@+id/layer_main">
+                <!-- 버튼 -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="5"
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/list"
+                    android:layout_marginBottom="50dp">
+                </LinearLayout>
+                <!-- 우측 영역 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="95">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_horizontal">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+                                <TableLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:columnCount="9"
+                                    android:id="@+id/itemTable"
+                                    android:stretchColumns="*"
+                                    android:background="@android:color/white">
+                                    <TableRow
+                                        android:id="@+id/firstRow"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@drawable/border">
+                                        <TextView
+                                            android:text="사진" android:textSize="30dp"
+                                            android:layout_gravity="center"
+                                            android:id="@+id/picture" />
+                                        <TextView
+                                            android:text="품명" android:textSize="30dp"
+                                            android:layout_gravity="center"
+                                            android:id="@+id/productName" />
+                                        <TextView
+                                            android:text="원산지   " android:textSize="30dp"
+                                            android:layout_gravity="center"
+                                            android:id="@+id/origin" />
+                                        <TextView
+                                            android:text="브랜드  " android:textSize="30dp"
+                                            android:layout_gravity="center"
+                                            android:id="@+id/brand" />
+                                        <TextView
+                                            android:text="규격  " android:textSize="30dp"
+                                            android:layout_gravity="center"
+                                            android:id="@+id/standard" />
+                                        <TextView
+                                            android:text="모델  " android:textSize="30dp"
+                                            android:layout_gravity="center"
+                                            android:id="@+id/model" />
+                                        <TextView
+                                            android:text="공급단가  " android:textSize="30dp"
+                                            android:layout_gravity="center"
+                                            android:id="@+id/cost" />
+                                        <Button android:text="장바구니 담기" android:layout_span="2"
+                                            android:layout_gravity="center"
+                                            android:textAlignment="center" android:id="@+id/pickBtn"
+                                            />
+                                    </TableRow>
+                                </TableLayout>
+                            </LinearLayout>
+                        </HorizontalScrollView>
+                    </LinearLayout>
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imageButton" />
+                </LinearLayout>
+            </LinearLayout>
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/shoppingCart">
+                <TableRow
+                    android:id="@+id/belowFirstRow">
+                    <TextView
+                        android:text="배송방법"
+                        android:layout_marginRight="20dp"
+                        android:id="@+id/deliveryNethod"/>
+                    <TextView
+                        android:text="수량"
+                        android:layout_marginRight="20dp"
+                        android:id="@+id/wholeNumber"/>
+                    <TextView
+                        android:text="공급합계"
+                        android:layout_marginRight="20dp"
+                        android:id="@+id/wholePrice"/>
+                    <Button
+                        android:layout_rowSpan="2"
+                        android:text="주문하기"
+                        android:layout_marginRight="20dp"
+                        android:id="@+id/orderButton"/>
+                </TableRow>
+                <TableRow
+                    android:id="@+id/belowSecondRow">
+                    <EditText
+                        android:hint="남길 말을 적어주세요"
+                        android:id="@+id/memo"
+                        android:layout_span="4"
+                        android:layout_gravity="fill_horizontal"
+                        android:gravity="center_horizontal"/>
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_gravity="right" />
+</LinearLayout>

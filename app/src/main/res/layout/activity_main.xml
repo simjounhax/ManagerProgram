@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <FrameLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:background="#FFFFE9">
+        <!-- 로그인 페이지-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:orientation="vertical"
+            android:id="@+id/layer_login"
+            tools:context="kr.com.yu.manage_prog.manager_program.MainActivity"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="260dp"
+                android:layout_height="62dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="150px"
+                android:id="@+id/logo"
+                android:src="@drawable/logo"
+                />
+
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:columnCount="2"
+                android:useDefaultMargins="true"
+                android:layout_marginTop="100px"
+                android:alignmentMode="alignBounds"
+                >
+
+                <TextView
+                    android:text="아이디"
+                    android:layout_gravity="right"
+                    android:textSize="50px"
+                    />
+                <EditText
+                    android:width="250dp"
+                    android:id="@+id/idForm"
+                    android:layout_marginLeft="20dp"
+                    android:inputType="text"
+                    android:singleLine="true"/>
+
+                <TextView
+                    android:text="패스워드"
+                    android:layout_gravity="center"
+                    android:textSize="50px"
+                    android:singleLine="false" />
+                <EditText
+                    android:width="250dp"
+                    android:id="@+id/pwForm"
+                    android:inputType="textPassword"
+                    android:layout_marginLeft="20dp"
+                    android:singleLine="true" />
+            </GridLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+                <Button
+                    android:text="로그인"
+                    android:id="@+id/btn_login"
+                    android:layout_gravity="right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:text="회원가입"
+                    android:id="@+id/btn_reg"
+                    android:layout_gravity="right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+        <!-- 회원가입 페이지 -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            android:id="@+id/layout_reg">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50px"
+                    android:layout_gravity="center|top"
+                    android:textStyle="bold"
+                    android:textSize="50px"
+                    android:text="회원가입"
+                    android:layout_marginBottom="30dp"
+                    />
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:columnCount="3"
+                    android:layout_marginTop="30px"
+                    android:useDefaultMargins="true">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnSpan="3"
+                        android:layout_gravity="left"
+                        android:text="주의: * 표시 항목은 필수 입력 항목입니다."/>
+                    <!-- 아이디 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10px"
+                        android:text="사용할 이이디(최대 20자)*"/>
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnSpan="2"
+                        android:layout_gravity="left|fill_horizontal"
+                        android:singleLine="true"
+                        android:gravity="right"
+                        android:maxLength="20"
+                        android:id="@+id/idRegisterForm"
+                        android:layout_marginLeft="30px"/>
+
+                    <!-- 비밀번호 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10px"
+                        android:text="사용할 비밀번호*"/>
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnSpan="2"
+                        android:layout_gravity="right|fill_horizontal"
+                        android:singleLine="true"
+                        android:gravity="right"
+                        android:inputType="textPassword"
+                        android:id="@+id/pwRegisterForm"
+                        android:layout_marginLeft="30px"/>
+
+                    <!-- 상호명 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10px"
+                        android:text="상호명*"
+                        />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnSpan="2"
+                        android:gravity="right"
+                        android:layout_gravity="right|fill_horizontal"
+                        android:layout_marginLeft="30px"
+                        android:id="@+id/shopName"
+                        />
+
+                    <!-- 대표자명 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:layout_marginLeft="10px"
+                        android:text="대표자명*"
+                        />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnSpan="2"
+                        android:singleLine="true"
+                        android:gravity="right"
+                        android:layout_gravity="right|fill_horizontal"
+                        android:layout_marginLeft="30px"
+                        android:id="@+id/executiveName"
+                        />
+
+                    <!-- 주소 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10px"
+                        android:text="주소지*"
+                        />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnSpan="2"
+                        android:singleLine="true"
+                        android:gravity="right"
+                        android:layout_gravity="right|fill_horizontal"
+                        android:layout_marginLeft="30px"
+                        android:id="@+id/address"
+                        />
+
+                    <!-- 휴대폰 번호 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10px"
+                        android:text="휴대폰 번호*"
+                        />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnSpan="2"
+                        android:gravity="right"
+                        android:id="@+id/cellPhone"
+                        android:inputType="text|number"
+                        android:layout_gravity="right|fill_horizontal"
+                        android:layout_marginLeft="30px"
+                        />
+
+                    <!-- 유선전화번호 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10px"
+                        android:text="유선전화*"
+                        />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnSpan="2"
+                        android:gravity="right"
+                        android:id="@+id/phoneNumber"
+                        android:inputType="text|number"
+                        android:layout_gravity="right|fill_horizontal"
+                        android:layout_marginLeft="30px"
+                        />
+
+                    <!-- 사업자등록번호 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10px"
+                        android:text="사업자등록번호*"
+                        />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnSpan="2"
+                        android:gravity="right"
+                        android:id="@+id/licenseeNumber"
+                        android:inputType="number|text"
+                        android:layout_gravity="right|fill_horizontal"
+                        android:layout_marginLeft="30px"
+                        />
+
+                    <!-- 화물지점 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10px"
+                        android:text="화물지점*"
+                        />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnSpan="2"
+                        android:gravity="right"
+                        android:id="@+id/freightBranch"
+                        android:inputType="text"
+                        android:layout_gravity="right|fill_horizontal"
+                        android:layout_marginLeft="30px"
+                        />
+
+                    <!-- 팩스번호 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10px"
+                        android:text="팩스번호"
+                        />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnSpan="2"
+                        android:gravity="right"
+                        android:id="@+id/faxNumber"
+                        android:inputType="text"
+                        android:layout_gravity="right|fill_horizontal"
+                        android:layout_marginLeft="30px"
+                        />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_gravity="right"
+                        android:layout_marginBottom="20dp"
+                        android:text="다시쓰기"
+                        android:id="@+id/btn_reset"/>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="등록하기"
+                        android:id="@+id/btn_reg_ok"/>
+                </GridLayout>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|left"
+                    android:text="돌아가기"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="#3898EC"
+                    android:id="@+id/btn_back"/>
+            </LinearLayout>
+        </ScrollView>
+    </FrameLayout>
+
+

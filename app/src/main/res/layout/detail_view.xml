@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="2">
+        <ImageView
+            android:id="@+id/image"/>
+        <ImageView
+            android:id="@+id/description"/>
+        <ImageView
+            android:id="@+id/detailImage"
+            android:layout_columnSpan="2"/>
+    </GridLayout>
+</ScrollView>
