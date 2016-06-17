@@ -21,6 +21,7 @@ import android.support.v7.widget.SearchView;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -38,6 +39,7 @@ import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -205,6 +207,8 @@ public class NavActivity extends AppCompatActivity implements View.OnClickListen
     final String METHOD_FREIGHT = "화물";
     final String METHOD_MANUALLY = "직접";
 
+    ArrayList<String> _noticeContent = new ArrayList<>();
+
     public Bitmap ByteArrayToBitmap(byte[] picData){
         Bitmap bitmap = BitmapFactory.decodeByteArray(/*데이터 소스*/picData, /*시작점*/0,
                                       /*Decode할 길이*/picData.length);
@@ -232,6 +236,7 @@ public class NavActivity extends AppCompatActivity implements View.OnClickListen
         _id = preData.getStringExtra("id");
 
         order = new Order();
+        DBManager.ResetInstance(this);
 
         setContentView(R.layout.activity_nav);
 
@@ -495,7 +500,7 @@ public class NavActivity extends AppCompatActivity implements View.OnClickListen
 
     private void Search(String keyword/*검색할 키워드*/, String searchType/*검색할 종류*/) {
         Cursor c;
-        SQLiteDatabase db = DBManager.getInstance(this).database;
+       SQLiteDatabase db = DBManager.getInstance(this).database;
 
         // 전체 상품, 신제품, 검색바 이용시
         if (searchType.equals("")) {
@@ -518,13 +523,13 @@ public class NavActivity extends AppCompatActivity implements View.OnClickListen
                     break;
                 // 공지사항 띄울 시
                 case "notice":
-                    /*
-                    c = db.query("",
+                    c = db.query("notice",
                             new String[]{
-                                    "pic", "name", "origin", "brand", "standard", "model", "cost", "id", "weight", "description"
+                                    "number", "header", "content", "date"
                             },
-                            "isNew=1", null, null, null, null);
-                    */
+                            null, null, null, null,
+                            "number desc");
+                    DisplayNotice(c);
             }
         }
         else if (searchType.equals("search")){
@@ -745,6 +750,96 @@ public class NavActivity extends AppCompatActivity implements View.OnClickListen
         }
     }
 
+    public void DisplayNotice(Cursor c){
+        // 우측 영역에 생성된 모든 Child 제거
+        itemTable.removeAllViews();
+        _noticeContent.clear();
+
+        // 새로운 TextView 생성 -> 공지사항 번호, 제목, 날짜, 글쓴사람
+        TextView noticeNumber = new TextView(this);
+        TextView noticeHeader = new TextView(this);
+        TextView noticeDate = new TextView(this);
+        TextView noticeWriter = new TextView(this);
+
+        // 새로운 TableRow를 추가
+        TableRow row = new TableRow(this);
+        row.setGravity(Gravity.CENTER);
+        row.setBackgroundResource(R.drawable.border);
+        row.setOnClickListener(new NoticeView());
+        row.setPadding(20, 0, 20, 0);
+
+        TableRow.LayoutParams trParams = new TableRow.LayoutParams();
+        trParams.setMargins(30, 0, 30, 0);
+
+        noticeNumber.setText("번호");
+        noticeNumber.setTextSize(20);
+        noticeNumber.setGravity(Gravity.CENTER);
+        row.addView(noticeNumber);
+
+        noticeHeader.setText("제목");
+        noticeHeader.setTextSize(20);
+        noticeHeader.setGravity(Gravity.CENTER);
+        noticeHeader.setLayoutParams(trParams);
+        row.addView(noticeHeader);
+
+        noticeDate.setText("날짜");
+        noticeDate.setTextSize(20);
+        noticeDate.setGravity(Gravity.CENTER);
+        noticeHeader.setLayoutParams(trParams);
+        row.addView(noticeDate);
+
+        noticeWriter.setText("글쓴이");
+        noticeWriter.setTextSize(20);
+        noticeWriter.setGravity(Gravity.CENTER);
+        row.addView(noticeWriter);
+
+        itemTable.addView(row);
+
+        while(c.moveToNext()){
+            noticeNumber = new TextView(this);
+            noticeHeader = new TextView(this);
+            noticeDate = new TextView(this);
+            noticeWriter = new TextView(this);
+
+            row = new TableRow(this);
+            row.setBackgroundResource(R.drawable.border);
+            row.setGravity(Gravity.CENTER);
+            row.setOnClickListener(new NoticeView());
+            row.setPadding(20, 0, 20, 0);
+
+            noticeNumber.setText(String.valueOf(c.getInt(0)));
+            noticeNumber.setTextSize(20);
+            noticeNumber.setGravity(Gravity.CENTER);
+            row.addView(noticeNumber);
+
+            noticeHeader.setText(c.getString(1));
+            noticeHeader.setTextSize(20);
+            noticeHeader.setLayoutParams(trParams);
+            noticeHeader.setGravity(Gravity.CENTER);
+            noticeHeader.setSingleLine(true);
+            noticeHeader.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+            noticeHeader.setMarqueeRepeatLimit(3);
+            noticeHeader.setSelected(true);
+            noticeHeader.setWidth(700);
+            row.addView(noticeHeader);
+
+            _noticeContent.add(c.getString(2));
+
+            noticeDate.setText(c.getString(3));
+            noticeDate.setTextSize(20);
+            noticeDate.setLayoutParams(trParams);
+            noticeDate.setGravity(Gravity.CENTER);
+            noticeDate.setLayoutParams(trParams);
+            row.addView(noticeDate);
+
+            noticeWriter.setText("관리자");
+            noticeWriter.setTextSize(20);
+            noticeWriter.setGravity(Gravity.CENTER);
+            row.addView(noticeWriter);
+
+            itemTable.addView(row);
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -965,6 +1060,9 @@ public class NavActivity extends AppCompatActivity implements View.OnClickListen
                     // 메모 항목
                     memoRow.addView(_memo);
                     shoppingCart.addView(memoRow);
+
+                    // 정상적으로 추가됨을 알린다
+                    Toast.makeText(NavActivity.this, "정상적으로 추가되었습니다", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -1063,7 +1161,7 @@ public class NavActivity extends AppCompatActivity implements View.OnClickListen
             // 주문번호 획득
             String orderNumber = c.getString(0);
 
-            String query2 = "insert into detailorder (name, origin, brand, standard, model, cost, amount, odernum) VALUES";
+            String query2 = "insert into detailorder (name, origin, brand, standard, model, cost, amount, ordernum) VALUES";
 
             // 가져온 주문번호를 가지고 개별적인 주문을 처리
             while(iterProduct.hasNext())
@@ -1080,7 +1178,7 @@ public class NavActivity extends AppCompatActivity implements View.OnClickListen
 
                 c.moveToNext();
                 // detailorder에 개별 주문 정보를 update
-                db.execSQL("insert into detailorder (name, origin, brand, standard, model, cost, amount, odernum) " +
+                db.execSQL("insert into detailorder (name, origin, brand, standard, model, cost, amount, ordernum) " +
                         String.format("VALUES ('%s','%s','%s','%s','%s','%s','%s','%s');"
                                 ,c.getString(0), c.getString(1), c.getString(2), c.getString(3), c.getString(4), c.getString(5), quantity, orderNumber));
 
@@ -1096,6 +1194,37 @@ public class NavActivity extends AppCompatActivity implements View.OnClickListen
             String updateContent = "orders="+query+"&detailorder="+query2;
 
             new Update().execute(updateContent);
+        }
+    }
+
+    // 공지사항 상세보기
+    private class NoticeView implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            // 이 activity와 연결되지 않은 다른 XML 문서로부터 받아오는 것이므로 직접 inflate해야 한다
+            layoutInflator = (LayoutInflater)NavActivity.this.getSystemService(LAYOUT_INFLATER_SERVICE);
+
+            View root = layoutInflator.inflate(R.layout.notice_view, null);
+            View notice = ((ScrollView)root).getChildAt(0);
+            GridLayout noticeGrid = (GridLayout)((LinearLayout)notice).getChildAt(0);
+
+            TextView noticeHeader = (TextView)(noticeGrid).getChildAt(1);
+            TextView noticeContent = (TextView)(noticeGrid).getChildAt(3);
+
+            int index = Integer.parseInt(((TextView)((TableRow)v).getChildAt(0)).getText().toString()) - 1;
+            noticeHeader.setText(((TextView)((TableRow)v).getChildAt(1)).getText().toString());
+            noticeContent.setText(_noticeContent.get(_noticeContent.size() - 1 - index));
+            noticeContent.setGravity(Gravity.CENTER);
+            noticeContent.setWidth(650);
+
+            // 다이얼로그 생성 및 세팅
+            AlertDialog.Builder alert = new AlertDialog.Builder(NavActivity.this);
+            alert.setView(root);
+            alert.setIcon(R.drawable.logo);
+            alert.setTitle("공지사항");
+            alert.setNegativeButton("닫기", null);
+            alert.setCancelable(true);
+            alert.show();
         }
     }
 }
@@ -1121,7 +1250,7 @@ class Update extends AsyncTask<String, String, String>{
         try {
             order.request(params[0]);
         } catch (IOException e) {
-            Toast.makeText(NavActivity.context, "주문 실패! 다시 시도하시기 바랍니다.", Toast.LENGTH_SHORT).show();
+            return "fail";
         }
 
         return "";
@@ -1130,6 +1259,9 @@ class Update extends AsyncTask<String, String, String>{
     @Override
     protected void onPostExecute(String s) {
         pDialog.dismiss();
+        if(s.equals("fail")){
+            Toast.makeText(NavActivity.context, "주문 실패! 다시 시도하시기 바랍니다.", Toast.LENGTH_SHORT).show();
+        }
         super.onPostExecute(s);
     }
 }
@@ -1144,7 +1276,6 @@ class Order extends NavActivity{
     public Order(){
         try{
             url = new URL("http://36.39.144.65:8084/app/order.jsp");
-            conn = (HttpURLConnection)url.openConnection();
         }
         catch (MalformedURLException e) {
             e.printStackTrace();
@@ -1157,19 +1288,21 @@ class Order extends NavActivity{
     public void request(String parameter) throws IOException {
         String params = parameter;
 
+        conn = (HttpURLConnection)url.openConnection();
+
         // 보내는 데이터를 설정
         conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
         // 받는 데이터를 JSON 타입으로 설정
         conn.setRequestProperty("Accept", "application/json");
 
-        conn.setReadTimeout(10000 /* milliseconds */);
-        conn.setConnectTimeout(15000 /* milliseconds */);
-        conn.setRequestMethod("POST");
         conn.setUseCaches(false);
         conn.setInstanceFollowRedirects(false);
         conn.setDoOutput(true);
         conn.setDoInput(true);
+        conn.setReadTimeout(10000 /* milliseconds */);
+        conn.setConnectTimeout(15000 /* milliseconds */);
+        conn.setRequestMethod("POST");
 
         OutputStream os = conn.getOutputStream();
         os.flush();

@@ -58,6 +58,7 @@ public class MyAsyncTask extends AsyncTask<String, String, String> {
             context.loadMgr.SetAction("login");
             context.loadMgr.SetVersion(DBManager.getInstance(context)._dbVersion);
             result = context.loadMgr.Login(params);
+            publishProgress("DB 확인 중");
             if(result.equals("discordance") == true)
             {
                 publishProgress("DB 다운로드");

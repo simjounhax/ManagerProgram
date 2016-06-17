@@ -16,7 +16,7 @@ public class DBManager {
     static int _dbVersion = 1;
 
     private static DBManager uniqueInstance = null;
-    protected    SQLiteDatabase database = null;
+    protected SQLiteDatabase database = null;
     private Cursor getData;
 
     public static DBManager getInstance(Context context){
@@ -24,6 +24,10 @@ public class DBManager {
             uniqueInstance = new DBManager(context);
         }
         return uniqueInstance;
+    }
+
+    public static void ResetInstance(Context context){
+        uniqueInstance = new DBManager(context);
     }
 
     private DBManager(Context context) {

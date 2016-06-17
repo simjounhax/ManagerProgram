@@ -38,8 +38,8 @@ public class LoadManager extends MainActivity{
     // 필요한 객체 초기화
     public LoadManager(){
         try{
+            // 보낼 URL 주소를 설정
             url = new URL("http://36.39.144.65:8084/app/index.jsp");
-            conn = (HttpURLConnection)url.openConnection();
         }
         catch (MalformedURLException e) {
             e.printStackTrace();
@@ -96,6 +96,8 @@ public class LoadManager extends MainActivity{
         BufferedReader buff = null;
 
         try{
+            conn = (HttpURLConnection)url.openConnection();
+
             // 보내는 데이터를 설정
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
@@ -223,9 +225,13 @@ public class LoadManager extends MainActivity{
     }
 
     public static void WriteFile(InputStream is, OutputStream os) throws IOException {
-        int c = 0;
-        while((c = is.read()) != -1)
-            os.write(c);
+        int length = 0;
+        final int BUFFER_SIZE = 4096;
+        byte[] outByte = new byte[BUFFER_SIZE];
+        while((length = is.read(outByte, 0, BUFFER_SIZE)) != -1)
+            os.write(outByte, 0, length);
         os.flush();
+        is.close();
+        os.close();
     }
 }
