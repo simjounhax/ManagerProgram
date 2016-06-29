@@ -47,7 +47,7 @@
                     android:width="250dp"
                     android:id="@+id/idForm"
                     android:layout_marginLeft="20dp"
-                    android:inputType="text"
+                    android:inputType="textAutoComplete"
                     android:singleLine="true"/>
 
                 <TextView
@@ -301,7 +301,7 @@
                         android:layout_columnSpan="2"
                         android:gravity="right"
                         android:id="@+id/faxNumber"
-                        android:inputType="text"
+                        android:inputType="number|text"
                         android:layout_gravity="right|fill_horizontal"
                         android:layout_marginLeft="30px"
                         />

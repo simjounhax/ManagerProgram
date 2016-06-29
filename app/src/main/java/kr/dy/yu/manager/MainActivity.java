@@ -1,6 +1,7 @@
 package kr.dy.yu.manager;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -25,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btn_Register_ok;
 
     public LoadManager loadMgr;
+    public MainActivity mainActivity = this;
+    static JSONObject _resultObject = null;
 
     // 로그인 아이디, 비밀번호
     EditText idForm;
@@ -60,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String _faxNumber = "";
 
     MyAsyncTask task;
-
 
     //인터넷에서 데이터를 가져오기 전에 연결상태부터 확인!
     public void connectStatusCheck(String action){

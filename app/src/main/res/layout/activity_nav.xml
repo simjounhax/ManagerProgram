@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/root">
     <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/wholeScroll">
+        android:id="@+id/rootscroll">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:id="@+id/rootright"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#FFFFE9"
+                android:background="#FFFFFF"
                 tools:context="kr.com.yu.manage_app.NavActivity"
                 android:orientation="horizontal"
                 android:id="@+id/layer_main">
@@ -31,25 +35,33 @@
                     android:layout_weight="5"
                     android:layout_marginTop="20dp"
                     android:id="@+id/list"
-                    android:layout_marginBottom="50dp">
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="50dp"
+                    android:paddingLeft="5dp">
                 </LinearLayout>
                 <!-- 우측 영역 -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:layout_weight="95">
+                    android:layout_weight="95"
+                    android:id="@+id/rootrightview">
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:id="@+id/rightArea">
                         <HorizontalScrollView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_gravity="center_horizontal">
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/horizontalScroll">
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+                                android:focusable="true"
+                                android:focusableInTouchMode="true"
+                                android:id="@+id/wholeScroll">
                                 <TableLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
@@ -61,39 +73,101 @@
                                         android:id="@+id/firstRow"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
-                                        android:background="@drawable/border">
-                                        <TextView
-                                            android:text="사진" android:textSize="30dp"
-                                            android:layout_gravity="center"
-                                            android:id="@+id/picture" />
-                                        <TextView
-                                            android:text="품명" android:textSize="30dp"
-                                            android:layout_gravity="center"
-                                            android:id="@+id/productName" />
-                                        <TextView
-                                            android:text="원산지   " android:textSize="30dp"
-                                            android:layout_gravity="center"
-                                            android:id="@+id/origin" />
-                                        <TextView
-                                            android:text="브랜드  " android:textSize="30dp"
-                                            android:layout_gravity="center"
-                                            android:id="@+id/brand" />
-                                        <TextView
-                                            android:text="규격  " android:textSize="30dp"
-                                            android:layout_gravity="center"
-                                            android:id="@+id/standard" />
-                                        <TextView
-                                            android:text="모델  " android:textSize="30dp"
-                                            android:layout_gravity="center"
-                                            android:id="@+id/model" />
-                                        <TextView
-                                            android:text="공급단가  " android:textSize="30dp"
-                                            android:layout_gravity="center"
-                                            android:id="@+id/cost" />
+                                        android:background="@drawable/mder">
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:background="@drawable/cellborder"
+                                            android:id="@+id/picture">
+                                            <TextView
+                                                android:text="사진" android:textSize="30dp"
+                                                android:textAlignment="center"
+                                                android:gravity="center"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"/>
+                                        </LinearLayout>
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:background="@drawable/cellborder"
+                                            android:id="@+id/productName">
+                                            <TextView
+                                                android:text="품명" android:textSize="30dp"
+                                                android:textAlignment="center"
+                                                android:gravity="center"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"/>
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:background="@drawable/cellborder"
+                                            android:id="@+id/origin">
+                                            <TextView
+                                                android:text="원산지" android:textSize="30dp"
+                                                android:textAlignment="center"
+                                                android:gravity="center"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"/>
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:background="@drawable/cellborder"
+                                            android:id="@+id/brand">
+                                            <TextView
+                                                android:text="브랜드" android:textSize="30dp"
+                                                android:textAlignment="center"
+                                                android:gravity="center"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"/>
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:background="@drawable/cellborder"
+                                            android:id="@+id/standard">
+                                            <TextView
+                                                android:text="규격" android:textSize="30dp"
+                                                android:textAlignment="center"
+                                                android:gravity="center"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"/>
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:background="@drawable/cellborder"
+                                            android:id="@+id/model">
+                                            <TextView
+                                                android:text="모델" android:textSize="30dp"
+                                                android:textAlignment="center"
+                                                android:gravity="center"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"/>
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:background="@drawable/cellborder"
+                                            android:id="@+id/cost">
+                                            <TextView
+                                                android:text="가격" android:textSize="30dp"
+                                                android:textAlignment="center"
+                                                android:gravity="center"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"/>
+                                        </LinearLayout>
                                         <Button android:text="장바구니 담기" android:layout_span="2"
+                                            android:layout_width="fill_parent"
+                                            android:layout_height="fill_parent"
                                             android:layout_gravity="center"
-                                            android:textAlignment="center" android:id="@+id/pickBtn"
-                                            />
+                                            android:textAlignment="center" android:id="@+id/pickBtn"/>
                                     </TableRow>
                                 </TableLayout>
                             </LinearLayout>
@@ -126,7 +200,7 @@
                         android:id="@+id/wholePrice"/>
                     <Button
                         android:layout_rowSpan="2"
-                        android:text="주문하기"
+                        android:text="장바구니 보기"
                         android:layout_marginRight="20dp"
                         android:id="@+id/orderButton"/>
                 </TableRow>
@@ -148,5 +222,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/progressBar"
-        android:layout_gravity="right" />
+        android:layout_gravity="right"/>
 </LinearLayout>
